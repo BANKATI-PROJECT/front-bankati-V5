@@ -1,0 +1,144 @@
+/* Form Container */
+form {
+    width: 80%; /* Reduce width to 80% of the parent container */
+    max-width: 600px; /* Set a max-width to prevent it from stretching too much */
+    margin: 0 auto; /* Center the form horizontally */
+    padding: 15px; /* Reduce padding to make the form more compact */
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1), 0px -5px 15px rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Reduce gap between elements */
+}
+
+/* Form Fields */
+input[type="number"],
+select {
+    width: 100%;
+    padding: 10px; /* Reduce padding inside fields */
+    margin-bottom: 15px; /* Reduce space between fields */
+    border: none;
+    border-radius: 8px;
+    background-color: #f7f7f7;
+    color: #333;
+    font-size: 0.9rem; /* Smaller font size */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Input focus */
+input[type="number"]:focus,
+select:focus {
+    outline: none;
+    background-color: #e9e9e9;
+    box-shadow: 0px 0px 10px rgba(78, 142, 255, 0.7);
+}
+
+/* Buttons */
+button {
+    display: inline-block;
+    padding: 12px 20px; /* Reduced padding */
+    font-size: 0.9rem; /* Smaller font size */
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #4e8eff, #0dcaf0);
+    color: #ffffff;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover effect on buttons */
+button:hover {
+    background: linear-gradient(90deg, #0dcaf0, #4e8eff);
+    box-shadow: 0px 8px 15px rgba(13, 202, 240, 0.6);
+    transform: translateY(-3px);
+}
+
+/* ETH Balance and Status */
+p {
+    font-size: 0.9rem; /* Smaller font size for text */
+    color: #333;
+    margin-bottom: 8px; /* Less space between text elements */
+}
+
+.eth-balance,
+.transaction-status {
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    form {
+        width: 90%; /* Adjust form width for smaller screens */
+        padding: 12px; /* Reduce padding on small screens */
+    }
+
+    input[type="number"],
+    select {
+        font-size: 0.85rem; /* Adjust font size for smaller screens */
+    }
+
+    button {
+        font-size: 0.85rem; /* Adjust font size for smaller screens */
+    }
+}
+/* Informative Section */
+.info-section {
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1), 0px -5px 15px rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.info-section h3 {
+    color: #333;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, #4e8eff, #0dcaf0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.info-section p {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.info-section a {
+    color: #0dcaf0;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.info-section a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments for the info section */
+@media (max-width: 768px) {
+    .info-section {
+        width: 90%; /* Make the info section wider on smaller screens */
+        padding: 12px;
+    }
+
+    .info-section h3 {
+        font-size: 1.3rem;
+    }
+
+    .info-section p {
+        font-size: 0.9rem;
+    }
+}

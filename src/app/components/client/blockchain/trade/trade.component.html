@@ -1,1 +1,44 @@
-<p>trade works!</p>
+<form (ngSubmit)="executeTrade()">
+    <div>
+      <label for="amountETH">Amount (ETH):</label>
+      <input
+        type="number"
+        id="amountETH"
+        [(ngModel)]="amountETH"
+        name="amountETH"
+        required
+      />
+    </div>
+  
+    <div>
+      <label for="tokenSelect">Select Token:</label>
+      <select
+        id="tokenSelect"
+        [(ngModel)]="selectedToken"
+        name="selectedToken"
+        (change)="onTokenSelect($event)"
+      >
+        <option value="USDT">USDT</option>
+        <option value="DAI">DAI</option>
+        <option value="USDC">USDC</option>
+        <!-- Add more options here -->
+      </select>
+    </div>
+  
+    <button type="submit" [disabled]="!amountETH || !selectedToken">
+      Execute Trade
+    </button>
+  </form>
+  
+  <p>ETH Balance: {{ ethBalance }}</p>
+  <p>Status: {{ transactionStatus }}</p>
+  
+  <!-- Informative Section -->
+  <section class="info-section">
+    <h3>Looking to swap USDT/USDC into Moroccan MAD?</h3>
+    <p>
+      We suggest using <a href="https://www.binance.com/en/p2p" target="_blank">Binance P2P</a> for hassle-free exchanges to Moroccan Dirham (MAD).
+      With Binance P2P, you can securely trade crypto with other users and easily convert your assets to local currencies.
+    </p>
+  </section>
+  
