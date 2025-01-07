@@ -2,17 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
-
 import { RouterModule } from '@angular/router';
 import { WalletService } from '../services/wallet.service';
 import { TransactionService } from '../services/transaction.service';
+import { CONTRACT_ADDRESSES } from '../contracts/contract-addresses'; // Update with the correct path
 
 @Component({
-    selector: 'app-wallet',
-    templateUrl: './wallet.component.html',
-    styleUrls: ['./wallet.component.css'],
-    standalone: true,  // Set standalone to true
-    imports: [RouterModule, CommonModule,FontAwesomeModule]})
+  selector: 'app-wallet',
+  templateUrl: './wallet.component.html',
+  styleUrls: ['./wallet.component.css'],
+  standalone: true, // Set standalone to true
+  imports: [RouterModule, CommonModule, FontAwesomeModule],
+})
 export class WalletComponent implements OnInit {
   faCopy = faCopy;
 
@@ -22,6 +23,8 @@ export class WalletComponent implements OnInit {
   walletAddress: string = '';
   transactionHistory: { hash: string; amount: string; timestamp: Date; To: string }[] = [];
 
+  // Use the imported CONTRACT_ADDRESSES
+  CONTRACT_ADDRESSES = CONTRACT_ADDRESSES;
 
   constructor(
     private walletService: WalletService,
@@ -31,7 +34,6 @@ export class WalletComponent implements OnInit {
   ngOnInit() {
     const storedPrivateKey = localStorage.getItem('privateKey');
     if (storedPrivateKey) {
-      // Attempt to connect the wallet if the private key is found
       this.walletService.connectWallet(storedPrivateKey);
       this.isWalletConnected = true;
       this.walletAddress = this.walletService.getWalletAddress();
@@ -40,7 +42,6 @@ export class WalletComponent implements OnInit {
       this.isWalletConnected = false;
     }
   }
-  
 
   connectWallet(privateKey: string): void {
     try {
@@ -61,7 +62,7 @@ export class WalletComponent implements OnInit {
     this.walletAddress = '';
     this.ethBalance = '0';
     this.tokenBalances = [];
-    this.transactionHistory=[];
+    this.transactionHistory = [];
     this.transactionService.clearTransactions();
   }
 
@@ -87,9 +88,8 @@ export class WalletComponent implements OnInit {
       const txHash = await this.walletService.sendTransaction(to, amount);
       console.log('Transaction sent successfully. Hash:', txHash);
       alert(`Transaction sent successfully!\nTransaction Hash: ${txHash}`);
-      this.refreshBalances(); // Update balances after sending
+      this.refreshBalances();
 
-      // Add the transaction to the history
       this.transactionService.addTransaction({
         hash: txHash,
         amount,
