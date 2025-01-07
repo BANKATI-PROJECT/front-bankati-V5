@@ -15,6 +15,8 @@ import { CardsComponent } from './components/client/cards/cards.component';
 import { TransferMoneyComponent } from './components/client/transfer-money/transfer-money.component';
 import { CreditCartComponent } from './components/client/credit-cart/credit-cart.component';
 import { ClientComponent } from './components/client/client/client.component';
+import { ChartComponent } from './components/client/blockchain/chart/chart.component';
+import { TradeComponent } from './components/client/blockchain/trade/trade.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/about', pathMatch: 'full' }, 
@@ -25,15 +27,17 @@ export const routes: Routes = [
     {path: 'add-agent', component: AddAgentComponent, canActivate: [AuthGuard], data: { role: 'ADMIN' }},
     { path: 'agent', component: AgentComponent, canActivate: [AuthGuard], data: { role: 'AGENT' } },
     { path: 'client', component: ClientComponent, canActivate: [AuthGuard], data: { role: 'CLIENT' } },
+    {path: 'market', component: ChartComponent, canActivate: [AuthGuard], data: { role: 'CLIENT' }},
+    {path: 'trade', component: TradeComponent, canActivate: [AuthGuard], data: { role: 'CLIENT' }},
     { path: 'unauthorized', component: UnauthorizedComponent },
-    { path: 'crianciers', component:AgencesComponent  },
-    { path: 'profile', component: ProfileComponent },
+    { path: 'crianciers', component:AgencesComponent ,canActivate: [AuthGuard], data: { role: 'CLIENT' } },
+    { path: 'profile', component: ProfileComponent,canActivate: [AuthGuard], data: { role: 'CLIENT' } },
    
-    { path: 'paye-form', component: PayeFormComponent },
-    { path: 'confirmepaye', component: ConfirmepayeComponent },
-    { path: 'cards', component: CardsComponent },
-    { path: 'transfer-money', component:TransferMoneyComponent  },
-    { path: 'credit-cart', component:CreditCartComponent },
+    { path: 'paye-form', component: PayeFormComponent,canActivate: [AuthGuard], data: { role: 'CLIENT' } },
+    { path: 'confirmepaye', component: ConfirmepayeComponent,canActivate: [AuthGuard], data: { role: 'CLIENT' } },
+    { path: 'cards', component: CardsComponent ,canActivate: [AuthGuard], data: { role: 'CLIENT' } },
+    { path: 'transfer-money', component:TransferMoneyComponent,canActivate: [AuthGuard], data: { role: 'CLIENT' }  },
+    { path: 'credit-cart', component:CreditCartComponent,canActivate: [AuthGuard], data: { role: 'CLIENT' } },
     // { path: '**', redirectTo: '/login' }
   ];
 

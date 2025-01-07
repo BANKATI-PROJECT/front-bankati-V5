@@ -91,7 +91,10 @@
         <app-transfer-money *ngIf="currentView === 'transfer-money'"></app-transfer-money>
         <app-cards *ngIf="currentView === 'cards'"></app-cards>
        
-    <app-wallet *ngIf="currentView === 'markets'"></app-wallet>
+    <app-wallet *ngIf="currentView === 'wallet'"></app-wallet>
+    <app-chart *ngIf="currentView === 'markets'"></app-chart>
+    <app-trade *ngIf="currentView === 'trade'"></app-trade>
+    <app-history *ngIf="currentView === 'transactionHistory'"></app-history>
       </div>
     </mat-drawer-content>
   </mat-drawer-container>

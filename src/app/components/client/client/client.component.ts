@@ -60,6 +60,9 @@ export class ClientComponent {
   // Afficher/masquer les sous-éléments du Crypto Wallet
   toggleCryptoWalletView() {
     this.showWallet = !this.showWallet;
+    if (this.showWallet) {
+      this.currentView = 'wallet';
+    }
   }
 
   // Sélectionner la vue dans le menu Crypto Wallet
