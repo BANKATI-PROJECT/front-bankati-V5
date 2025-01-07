@@ -14,9 +14,9 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('authToken');
     const userRole = localStorage.getItem('userRole');
-    
+
     // Store the attempted URL for redirecting
     localStorage.setItem('attemptedUrl', state.url);
 

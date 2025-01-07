@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MockAuthService } from '../../services/mock-auth.service'; // Update to your service
 import { Router } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { LoginResponse } from '../../services/mock-auth.service';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   standalone: true,
@@ -14,9 +13,10 @@ import { LoginResponse } from '../../services/mock-auth.service';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  loginInvalid = false;
 
   constructor(
-    private authService: MockAuthService,
+    private authService: AuthService,
     private router: Router,
     private formBuilder: FormBuilder
   ) {}
@@ -24,50 +24,40 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
 
   login(): void {
     if (this.loginForm.invalid) {
-      console.log('Form is invalid');
-      return; // Add form validation before proceeding
+      this.loginInvalid = true;
+      return;
     }
 
-    const username = this.loginForm.value.username;
-    const password = this.loginForm.value.password;
-
-    console.log('Tentative de connexion avec les identifiants :', username, password);
+    const { username, password } = this.loginForm.value;
 
     this.authService.login(username, password).subscribe(
-      (response: LoginResponse | null) => {
-        if (response) {
-          console.log('Réponse de l\'API de connexion :', response);
-          localStorage.setItem('token', response.token);
+      (response: any) => {
+        console.log('Connexion réussie :', response);
 
-          // Simulate token payload extraction
-          const tokenPayload = JSON.parse(atob(response.token.split('.')[1]));
-          const userRole = response.role;
-          
-          // Save user role in localStorage
-          localStorage.setItem('userRole', userRole);
-
-          if (userRole === 'ADMIN') {
-            console.log('Redirection vers la page d\'administration');
+        // Redirection en fonction du rôle
+        switch (response.role) {
+          case 'ADMIN':
             this.router.navigate(['/admin']);
-          } else if (userRole === 'CLIENT') {
-            console.log('Redirection vers la page client');
+            break;
+          case 'CLIENT':
             this.router.navigate(['/client']);
-          } else if (userRole === 'AGENT') {
-            console.log('Redirection vers la page agent');
+            break;
+          case 'AGENT':
             this.router.navigate(['/agent']);
-          }
-        } else {
-          console.error('Échec de la connexion, identifiants invalides');
+            break;
+          default:
+            console.error('Rôle inconnu :', response.role);
         }
       },
-      (error: any) => {
+      (error) => {
         console.error('Erreur lors de la connexion :', error);
+        this.loginInvalid = true;
       }
     );
   }
