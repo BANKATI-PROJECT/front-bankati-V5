@@ -47,10 +47,10 @@ export class AgencesComponent implements OnInit {
       },
       {
         image: 'assets/images/IAM-image.jpg',
-        name: 'IAM RECHARGES',
+        name: 'Maroc Télécom',
         services: [
-          { id: 3, name: 'Téléphone SIM' },
-          { id: 4, name: 'Internet' }
+          { id: 3, name: 'Recharges', redirectTo: '/iam/recharges' },
+          { id: 4, name: 'Factures', redirectTo: '/iam/factures' }
         ]
       },
       {
@@ -89,11 +89,8 @@ export class AgencesComponent implements OnInit {
 //   goservice(){
 // this.router.navigate(['/facturesnonpaye']);
 //   }
- 
-goservice(serviceId: number): void {
-  // Naviguer vers la page facturesnonpaye tout en gardant le menu visible
-  console.log(`Service sélectionné avec ID: ${serviceId}`);
-  this.router.navigate(['/paye-form']);
-}
+goservice(serviceId: any): void {
 
+  this.router.navigate([`${serviceId.redirectTo}`]);
+}
 }

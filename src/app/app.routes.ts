@@ -17,6 +17,10 @@ import { CreditCartComponent } from './components/client/credit-cart/credit-cart
 import { ClientComponent } from './components/client/client/client.component';
 import { ChartComponent } from './components/client/blockchain/chart/chart.component';
 import { TradeComponent } from './components/client/blockchain/trade/trade.component';
+import { OfferComponent } from './components/client/agences/iam/recharge/offer/offer/offer.component';
+import { RechargeComponent } from './components/client/agences/iam/recharge/recharge/recharge.component';
+import { FactureComponent } from './components/client/agences/iam/facture/facture/facture.component';
+import { DetailComponent } from './components/client/agences/iam/facture/detail/detail/detail.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/about', pathMatch: 'full' }, 
@@ -38,6 +42,10 @@ export const routes: Routes = [
     { path: 'cards', component: CardsComponent ,canActivate: [AuthGuard], data: { role: 'CLIENT' } },
     { path: 'transfer-money', component:TransferMoneyComponent,canActivate: [AuthGuard], data: { role: 'CLIENT' }  },
     { path: 'credit-cart', component:CreditCartComponent,canActivate: [AuthGuard], data: { role: 'CLIENT' } },
+    { path: 'iam/recharges', component: RechargeComponent ,canActivate: [AuthGuard], data: { role: 'CLIENT' }},
+    { path: 'iam/recharges/offer', component: OfferComponent ,canActivate: [AuthGuard], data: { role: 'CLIENT' }},
+    { path: 'iam/factures', component: FactureComponent ,canActivate: [AuthGuard], data: { role: 'CLIENT' }},
+    { path: 'iam/factures/detail', component: DetailComponent ,canActivate: [AuthGuard], data: { role: 'CLIENT' }},
     // { path: '**', redirectTo: '/login' }
   ];
 

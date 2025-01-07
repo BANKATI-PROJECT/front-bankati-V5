@@ -1,0 +1,25 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-3">
+            <img src="assets/images/IAM-image.jpg" alt="IAM Image" class="card-img-top">
+        </div>
+        <div class="col-9">
+            <div class="form-group">
+                <label for="phone">Phone number</label>
+                <input [(ngModel)]="phoneNumber" type="text" class="form-control" id="phone" placeholder="Phone number">
+            </div>
+            <div class="form-group my-3">
+                <div>
+                    <label for="amount">Amount</label>
+                </div>
+                <select [(ngModel)]="amount" name="amount" id="amount" class="form-select my-2">
+                    <option value="5">5 DHs</option>
+                    <option value="10">10 DHs</option>
+                </select>
+            </div>
+            <div class="form-group text-end">
+                <button (click)="submit($event)" class="btn btn-primary">Next</button>
+            </div>
+        </div>
+    </div>
+</div>

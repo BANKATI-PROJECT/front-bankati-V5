@@ -8,7 +8,7 @@
             <h5 class="card-title">{{ creditor.name }}</h5>
             <ul class="list-group list-group-flush">
               <li class="list-group-item" *ngFor="let service of creditor.services">
-                <a  (click)="goservice(service.id)">{{ service.name }}</a>
+                <a  (click)="goservice(service)">{{ service.name }}</a>
               </li>
             </ul>
           </div>

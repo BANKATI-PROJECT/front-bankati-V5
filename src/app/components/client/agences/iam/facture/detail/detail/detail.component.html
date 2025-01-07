@@ -1,0 +1,48 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-3">
+            <img src="assets/images/IAM-image.jpg" alt="IAM Image" class="card-img-top">
+        </div>
+        <div class="col-9">
+            <div class="form-group">
+                <h3>Détails de la facture</h3>
+            </div>
+            <div class="form-group mt-4 mb-2">
+                <ng-container *ngIf="invoice != null">
+                    <table>
+                        <tr>
+                            <td class="w-50">Référence</td>
+                            <td>{{ invoice.reference }}</td>
+                        </tr>
+                        <tr>
+                            <td>Nom</td>
+                            <td>{{ invoice.customerName }}</td>
+                        </tr>
+                        <tr>
+                            <td>Abonnement</td>
+                            <td>{{ invoice.packName }} ( {{ invoice.packDescription }} )</td>
+                        </tr>
+                        <tr>
+                            <td>Mois à payer</td>
+                            <td>{{ invoice.monthToPay }} {{ invoice.year }}</td>
+                        </tr>
+                        <tr>
+                            <td>Date d'échéance</td>
+                            <td>{{ invoice.dueDate }}</td>
+                        </tr>
+                        <tr>
+                            <td>Montant</td>
+                            <td>{{ invoice.packPrice }} Dhs</td>
+                        </tr>
+                    </table>
+                </ng-container>
+                <ng-container *ngIf="invoice == null">
+                    <p>Facture introuvable</p>
+                </ng-container>
+            </div>
+            <div class="form-group text-end">
+                <button (click)="submit($event)" class="btn btn-primary">Régler la facture</button>
+            </div>
+        </div>
+    </div>
+</div>
