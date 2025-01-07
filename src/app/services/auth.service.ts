@@ -7,13 +7,10 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8089/api/auth';
+  private apiUrl = 'http://localhost:8089/auth'; // Utilise la Gateway URL
   private userRole: string | null = null;
 
-  constructor(private http: HttpClient) {
-    // Initialize userRole from localStorage
-    this.userRole = localStorage.getItem('userRole');
-  }
+  constructor(private http: HttpClient) {}
 
   login(username: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, { username, password }).pipe(
@@ -25,49 +22,29 @@ export class AuthService {
     );
   }
 
-  logout(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/logout`).pipe(
-      tap(() => {
-        localStorage.removeItem('userRole');
-        localStorage.removeItem('authToken');
-        this.userRole = null;
-      })
-    );
+  logout(): void {
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('authToken');
+    this.userRole = null;
   }
 
   getRole(): string | null {
-    return this.userRole;
+    return localStorage.getItem('userRole');
   }
 
   isLoggedIn(): boolean {
-    return this.userRole !== null && this.userRole !== undefined;
-  }
-
-  isLoggedOut(): boolean {
-    return !this.isLoggedIn();
+    return !!localStorage.getItem('authToken');
   }
 
   isAdmin(): boolean {
-    return this.userRole === 'ADMIN';
-  }
-
-  isAgent(): boolean {
-    return this.userRole === 'AGENT';
+    return this.getRole() === 'ADMIN';
   }
 
   isClient(): boolean {
-    return this.userRole === 'CLIENT';
+    return this.getRole() === 'CLIENT';
   }
 
-  isFirstLogin(): boolean {
-    try {
-      return JSON.parse(localStorage.getItem('firstLogin') || 'false');
-    } catch {
-      return false;
-    }
-  }
-
-  completeFirstLogin(): void {
-    localStorage.setItem('firstLogin', 'false');
+  isAgent(): boolean {
+    return this.getRole() === 'AGENT';
   }
 }

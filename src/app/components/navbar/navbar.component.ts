@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { MockAuthService } from '../../services/mock-auth.service'; // Update path as needed
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { finalize } from 'rxjs/operators';
+import {AuthService} from '../../services/auth.service';
 
 
 @Component({
@@ -13,45 +12,36 @@ import { finalize } from 'rxjs/operators';
   imports: [CommonModule, RouterModule],
 })
 export class NavbarComponent {
-  constructor(private authService: MockAuthService, private router: Router) {}
-  
+  constructor(private authService: AuthService, private router: Router) {}
 
+  // Méthode pour vérifier si l'utilisateur est connecté
   isLoggedIn(): boolean {
-    // console.log('Logged in status:', this.authService.isLoggedIn());
     return this.authService.isLoggedIn();
   }
 
+  // Méthode pour vérifier si l'utilisateur est déconnecté
   isLoggedOut(): boolean {
-    return this.authService.isLoggedOut();
+    return !this.authService.isLoggedIn();
   }
 
+  // Méthode pour vérifier si l'utilisateur est un admin
   isAdmin(): boolean {
     return this.authService.isAdmin();
   }
 
+  // Méthode pour vérifier si l'utilisateur est un agent
   isAgent(): boolean {
     return this.authService.isAgent();
   }
 
+  // Méthode pour vérifier si l'utilisateur est un client
   isClient(): boolean {
     return this.authService.isClient();
   }
 
-  // Logout method: Removes authentication data and redirects
+  // Méthode de déconnexion
   logout(): void {
-    this.authService.logout()
-      .pipe(
-        finalize(() => {
-          window.location.href = '/about'; // Force a full page reload and navigation
-        })
-      )
-      .subscribe({
-        next: () => {
-          console.log('Logout successful');
-        },
-        error: (error) => {
-          console.error('Logout error:', error);
-        }
-      });
+    this.authService.logout();
+    this.router.navigate(['/login']); // Redirige l'utilisateur vers la page de connexion après la déconnexion
   }
 }

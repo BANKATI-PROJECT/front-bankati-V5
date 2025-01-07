@@ -1,42 +1,37 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 export interface Agent {
+  id: number;
   nom: string;
   prenom: string;
   email: string;
   telephone: string;
-  pieceIdentiteFaceOne: File | null; // Assurez-vous que le type est correct pour les fichiers
-  pieceIdentiteFaceTwo: File | null; // Assurez-vous que le type est correct pour les fichiers
-  numPieceIdentite: string;
-  dateNaissance: string; // Ou vous pouvez utiliser le type Date
+  dateNaissance: string;
   adresse: string;
   numPattente: string;
-
+  numPieceIdentite: string;
+  pieceIdentiteFaceTwo: { imageUrl: string };
 }
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class AgentService {
 
-  private apiUrl = 'http://localhost:8089/api/BackOffice/listAgents';
-
-  
-
-
-  private apiUrl1 = 'http://localhost:8089/api/BackOffice'; // Assurez-vous que l'URL est correcte
-
+  private apiUrl = 'http://localhost:8089/api/admin/listAgents';
+  private url = 'http://localhost:8089/api/admin/agent';
   constructor(private http: HttpClient) {}
 
-  addAgent(formData: FormData): Observable<any> {
-    return this.http.post(`${this.apiUrl1}/createAgent`, formData);
-  }
-  getAgents(): Observable<Agent[]> {
-    console.log('vvvvvvvv',this.http.get<Agent[]>(this.apiUrl));
-    return this.http.get<Agent[]>(this.apiUrl);
+  getAgents(authToken: string): Observable<Agent[]> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
+    return this.http.get<Agent[]>(this.apiUrl, { headers });
   }
 
-  // Ajoutez d'autres méthodes pour manipuler les agents si nécessaire
+  addAgent(formData: FormData): Observable<any> {
+    const authToken = localStorage.getItem('authToken') || '';
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
+    return this.http.post(this.url, formData, { headers });
+  }
 }
+

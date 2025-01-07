@@ -20,35 +20,46 @@ import { MatSelectModule } from '@angular/material/select';
 export class AgentListComponent implements OnInit {
 
   agents: Agent[] = [];
-  displayedColumns: string[] = ['lastName', 'firstName', 'idType', 'idNumber', 'birthDate', 'address', 'email', 'phone','patentNumber', 'actions'];
+  displayedColumns: string[] = ['lastName', 'firstName', 'idType', 'idNumber', 'birthDate', 'address', 'email', 'phone', 'patentNumber', 'actions'];
 
-
-  constructor(private agentService: AgentService,private router: Router) {}
+  constructor(private agentService: AgentService, private router: Router) {}
 
   ngOnInit(): void {
-    this.agentService.getAgents().subscribe((agents) => {
-      console.log("Agents:", agents);
-      this.agents = agents;
-    });
-  }
+    const authToken = localStorage.getItem('authToken');
+    const userRole = localStorage.getItem('userRole');
 
-  editAgent(agent: Agent) {
-    // Implémentez la logique pour modifier l'agent ici
-    alert('Fonctionnalité de modification de l\'agent sera implémentée ici.');
-  }
-
-  deleteAgent(agent: Agent) {
-    // Implémentez la logique pour supprimer l'agent ici
-    const index = this.agents.indexOf(agent);
-    if (index !== -1) {
-      this.agents.splice(index, 1);
-      // Vous pouvez également appeler une méthode de service pour supprimer l'agent du backend
-      // this.agentService.deleteAgent(agent);
+    if (authToken && userRole === 'ADMIN') {
+      this.agentService.getAgents(authToken).subscribe({
+        next: (agents) => {
+          console.log('Agents:', agents);
+          this.agents = agents;
+        },
+        error: (err) => {
+          console.error('Erreur lors de la récupération des agents:', err);
+          if (err.status === 403) {
+            alert('Vous n’avez pas les autorisations nécessaires pour accéder à cette ressource.');
+          }
+        }
+      });
+    } else {
+      alert('Vous n’êtes pas autorisé à accéder à cette page.');
+      this.router.navigate(['/login']); // Rediriger vers la page de connexion
     }
   }
 
-  goBack() {
-    // Implémentez la logique pour revenir à la page précédente
+  editAgent(agent: Agent): void {
+    alert(`Modification de l'agent ${agent.nom} à implémenter.`);
+  }
+
+  deleteAgent(agent: Agent): void {
+    const index = this.agents.indexOf(agent);
+    if (index !== -1) {
+      this.agents.splice(index, 1);
+      alert(`Suppression de l'agent ${agent.nom} à implémenter.`);
+    }
+  }
+
+  goBack(): void {
     this.router.navigate(['/admin']);
   }
 }

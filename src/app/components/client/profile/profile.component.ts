@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { AuthService } from '../../../services/auth.service';
 import { CommonModule } from '@angular/common';
@@ -14,33 +13,33 @@ import { MatIconModule } from '@angular/material/icon';  // Si vous utilisez Ang
   standalone: true,
       imports: [
         CommonModule,FormsModule,MatIconModule
-       
+
       ],
 })
 export class ProfileComponent implements OnInit {
   client: any;
-  balance: number = 1500000; // Solde initial
-  amountToUpdate: number = 0; // Montant à ajuster
-  isInputVisible: boolean = false; // Variable pour afficher/masquer le champ de saisie
+  balance: number = 1500000;
+  amountToUpdate: number = 0;
+  isInputVisible: boolean = false;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {}
 
-  // Fonction pour afficher/masquer le champ de saisie
+
   toggleInput(): void {
     this.isInputVisible = !this.isInputVisible;
   }
 
-  // Mise à jour du solde
+
   updateBalance(): void {
     if (this.amountToUpdate !== 0) {
       this.balance += this.amountToUpdate;
 
-      // Vérification pour éviter un solde négatif
+
       if (this.balance < 0) {
         alert('Le solde ne peut pas être négatif.');
-        this.balance = 0; // Remise à zéro si le solde devient négatif
+        this.balance = 0;
       }
 
       alert(`Le solde a été mis à jour à ${this.balance} Dh.`);

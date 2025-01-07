@@ -11,7 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
- 
+
 
 import { Router, RouterModule } from '@angular/router';
 import { AgentService } from '../../../services/agent.service';
@@ -25,63 +25,78 @@ import { AgentService } from '../../../services/agent.service';
 })
 export class AddAgentComponent {
   backoffice!: FormGroup;
-  selectedFiles: { [key: string]: File } = {};
+  selectedFiles: File[] = []; // Pour gérer les fichiers multiples
 
   constructor(private fb: FormBuilder, private agentService: AgentService, private router: Router) {
+    // Initialisation du formulaire
     this.backoffice = this.fb.group({
       nom: ['', Validators.required],
       prenom: ['', Validators.required],
-      numPieceIdentite: ['', Validators.required],
+      numCIN: ['', Validators.required],
       dateNaissance: ['', Validators.required],
       adresse: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       confirmEmail: ['', [Validators.required, Validators.email]],
-      telephone: ['', Validators.required],
+      numTelephone: ['', Validators.required],
+      numImmatriculeRegisterCommerce: ['', Validators.required],
       numPattente: ['', Validators.required],
-      pieceIdentiteFaceOne: ['', Validators.required],
-      pieceIdentiteFaceTwo: ['', Validators.required]
-    }, { validators: this.emailsMatchValidator });
+      pieceJoints: [null, Validators.required], // Validation pour fichiers
+    }, { validators: this.emailMatchValidator });
   }
 
-  emailsMatchValidator(group: FormGroup) {
+  // Validation personnalisée pour les emails
+  emailMatchValidator(group: FormGroup): { [key: string]: boolean } | null {
     const email = group.get('email')?.value;
     const confirmEmail = group.get('confirmEmail')?.value;
     return email === confirmEmail ? null : { emailMismatch: true };
   }
 
-  onFileSelected(event: Event, field: string) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length) {
-      this.selectedFiles[field] = input.files[0];
+  // Gestion des fichiers sélectionnés
+  onFileSelected(event: any): void {
+    const files = event.target.files;
+    console.log('Fichiers sélectionnés:', files); // Ajout pour débogage
+    for (let i = 0; i < files.length; i++) {
+      this.selectedFiles.push(files[i]);
     }
+    console.log('Tableau des fichiers:', this.selectedFiles);
   }
 
-  onSubmit() {
-    if (this.backoffice.valid) {
-      const formData = new FormData();
-      Object.keys(this.backoffice.controls).forEach(key => {
-        if (key !== 'pieceIdentiteFaceOne' && key !== 'pieceIdentiteFaceTwo') {
-          formData.append(key, this.backoffice.get(key)?.value);
-        }
-      });
-      formData.append('pieceIdentiteFaceOne', this.selectedFiles['pieceIdentiteFaceOne']);
-      formData.append('pieceIdentiteFaceTwo', this.selectedFiles['pieceIdentiteFaceTwo']);
-
-      this.agentService.addAgent(formData).subscribe(response => {
-        alert('Agent ajouté avec succès');
-        this.router.navigate(['/agents']);
-      }, error => {
-        console.error('Erreur lors de l\'ajout de l\'agent', error);
-        alert('Une erreur est survenue lors de l\'ajout de l\'agent');
-      });
+  // Envoi des données au backend
+  onSubmit(): void {
+    if (this.backoffice.invalid) {
+      console.log('Formulaire invalide : ', this.backoffice.errors);
+      console.log('État des contrôles :', this.backoffice.controls);
+      return;
     }
+
+    const formData = new FormData();
+    formData.append('nom', this.backoffice.value.nom);
+    formData.append('prenom', this.backoffice.value.prenom);
+    formData.append('numCIN', this.backoffice.value.numCIN);
+    formData.append('dateNaissance', this.backoffice.value.dateNaissance);
+    formData.append('adresse', this.backoffice.value.adresse);
+    formData.append('email', this.backoffice.value.email);
+    formData.append('numTelephone', this.backoffice.value.numTelephone);
+    formData.append('numImmatriculeRegisterCommerce', this.backoffice.value.numImmatriculeRegisterCommerce);
+    formData.append('numPattente', this.backoffice.value.numPattente);
+
+    // Ajout des fichiers
+    this.selectedFiles.forEach((file) => formData.append('pieceJoints', file));
+
+    console.log('FormData avant envoi:', formData);
+    this.agentService.addAgent(formData).subscribe(
+      (response) => {
+        console.log('Agent ajouté avec succès', response);
+        this.router.navigate(['/admin/dashboard']);
+      },
+      (error) => {
+        console.error('Erreur lors de l’ajout de l’agent', error);
+      }
+    );
   }
 
-  onCancel() {
-    this.backoffice.reset();
-  }
-
-  goBack() {
-    this.router.navigate(['/']);
+  // Annuler l'opération
+  onCancel(): void {
+    this.router.navigate(['/admin/dashboard']);
   }
 }
