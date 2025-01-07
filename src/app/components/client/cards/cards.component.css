@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+ h3 {
+    color: black !important;
+  }
+
+.container {
+    min-height: 100vh;
+    background: #eee;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+form {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 400px;
+    margin-bottom: 40px;
+}
+
+form .inputBox {
+    margin-bottom: 20px;
+}
+
+form .inputBox span {
+    display: block;
+    color: #666;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+form .inputBox input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    color: #333;
+}
+
+form .submit-btn {
+    width: 100%;
+    background: linear-gradient(45deg, blueviolet, rgb(255, 200, 20));
+    color: #fff;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+form .submit-btn:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+.card-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+}
+
+.card-container {
+    position: relative;
+    width: 300px;
+    height: 180px;
+    background: linear-gradient(45deg, blueviolet, rgb(233, 195, 27));
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    color: #fff;
+    transition: transform 0.3s ease;
+}
+
+.card-container:hover {
+    transform: translateY(-5px) scale(1.02);
+}
+
+.card-container .image {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.card-container .image img {
+    height: 40px;
+}
+
+.card-container .card-number-box {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.card-container .flexbox {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}

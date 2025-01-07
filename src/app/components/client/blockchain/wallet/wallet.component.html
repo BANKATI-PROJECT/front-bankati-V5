@@ -1,0 +1,59 @@
+<div class="wallet-container">
+  <h2>Wallet</h2>
+
+  <div *ngIf="!isWalletConnected" class="wallet-connection">
+    <label for="privateKey">Private Key:</label>
+    <input
+      #privateKeyInput
+      type="password"
+      id="privateKey"
+      placeholder="Enter Private Key"
+    />
+    <button (click)="connectWallet(privateKeyInput.value)">Connect Wallet</button>
+  </div>
+
+  <div *ngIf="isWalletConnected" class="wallet-dashboard">
+    <div class="wallet-info">
+      <p><strong>Wallet Address:</strong> {{ walletAddress }}</p>
+      <button (click)="copyToClipboard(walletAddress)">
+        <fa-icon [icon]="faCopy"></fa-icon>
+      </button>
+      <button (click)="disconnectWallet()">Disconnect Wallet</button>
+    </div>
+
+    <div class="balance-section">
+      <p><strong>ETH Balance:</strong> {{ ethBalance }} (ETH)</p>
+    </div>
+
+    <div *ngIf="tokenBalances.length > 0" class="token-balances">
+      <h3>Token Balances</h3>
+      <ul>
+        <li *ngFor="let token of tokenBalances">
+          <strong>{{ token.name }}:</strong> {{ token.balance }} ({{ token.symbol }})
+        </li>
+      </ul>
+    </div>
+    <button class="refresh" (click)="refreshBalances()">Refresh Balance</button>
+
+    <h3>Send Ether</h3>
+    <div class="send-ether">
+      <label for="recipient">Recipient Address:</label>
+      <input
+        #recipientInput
+        type="text"
+        id="recipient"
+        placeholder="Enter Address"
+      />
+      <label for="amount">Amount (ETH):</label>
+      <input
+        #amountInput
+        type="text"
+        id="amount"
+        placeholder="Enter Amount"
+      />
+      <button (click)="sendTransaction(recipientInput.value, amountInput.value)">
+        Send
+      </button>
+    </div>
+  </div>
+</div>

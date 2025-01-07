@@ -1,0 +1,58 @@
+<div class="transfer-container"> 
+  <mat-card class="transfer-card">
+    <mat-card-header>
+      <mat-card-title>Virement Bancaire</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit()" #transferForm="ngForm">
+        <!-- Compte du destinataire -->
+        <mat-form-field appearance="fill">
+          <mat-label>Compte du destinataire</mat-label>
+          <input
+            matInput
+            placeholder="Numéro de compte"
+            [(ngModel)]="recipientAccount"
+            name="recipientAccount"
+            required
+          />
+        </mat-form-field>
+
+        <!-- Montant -->
+        <mat-form-field appearance="fill">
+          <mat-label>Montant</mat-label>
+          <input
+            matInput
+            type="number"
+            placeholder="Montant à transférer"
+            [(ngModel)]="amount"
+            name="amount"
+            required
+          />
+        </mat-form-field>
+
+        <!-- Affichage de la confirmation -->
+        <div *ngIf="showConfirmation" class="confirmation-message">
+          <p><strong>Confirmation du Virement :</strong></p>
+          <p><strong>Compte destinataire:</strong> {{ recipientAccount }}</p>
+          <p><strong>Montant:</strong> {{ amount }} Dh</p>
+          <button mat-raised-button style="background-color: #FF7F00; margin-right: 10px;" (click)="performTransfer()">Confirmer le virement</button>
+          <button mat-raised-button color="warn" (click)="cancelTransfer()">Annuler</button>
+        </div>
+
+        <!-- Bouton de soumission, qui déclenche la confirmation -->
+        <div *ngIf="!showConfirmation">
+          <button
+            mat-raised-button
+            class="submit-button"
+            type="submit"
+            [disabled]="!transferForm.form.valid"
+            (click)="toggleConfirmation()"
+          >
+            Effectuer le virement
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

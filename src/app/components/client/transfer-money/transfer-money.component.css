@@ -1,0 +1,80 @@
+/* Conteneur principal */
+.transfer-container {
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center; /* Centre verticalement */
+  height: 100vh; /* Hauteur de la fenêtre */
+  background-color: #f4f4f4; /* Fond de la page */
+  padding: 10px;
+  box-sizing: border-box; /* Pour éviter les débordements */
+  margin-top: -60px; /* Déplace le conteneur un peu vers le haut */
+}
+
+/* Card */
+mat-card.transfer-card {
+  max-width: 600px;
+  width: 100%;
+  min-width: 300px; /* Largeur minimale */
+  height: auto; /* Ajustement automatique en fonction du contenu */
+  max-height: 600px;
+  padding: 20px;
+  background-color: rgba(248, 215, 152, 0.85);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* Champs de formulaire */
+mat-form-field {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Bouton de soumission */
+.submit-button {
+  background-color: #ff7f00;
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #e57300;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .transfer-card {
+    width: 90%;
+  }
+
+  .submit-button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+/* Style pour le message de confirmation */
+.confirmation-message {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.submit-button {
+  background-color: #ff7f00;
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.submit-button:hover {
+  background-color: #e57300;
+}
+
+

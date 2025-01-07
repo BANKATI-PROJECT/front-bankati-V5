@@ -1,0 +1,90 @@
+/* Transaction History Container */
+.transaction-history {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 30px;
+    max-width: 900px;
+    background: linear-gradient(145deg, #121212, #1a1a1a);
+    border-radius: 16px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.7), 0px -5px 15px rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  /* Heading */
+  .transaction-history h3 {
+    text-align: center;
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, #4e8eff, #0dcaf0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Transaction List */
+  .transaction-history ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  
+  /* Individual Transaction Item */
+  .transaction-history li {
+    background: linear-gradient(145deg, #292929, #1e1e1e);
+    margin-bottom: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  /* Transaction Item Text */
+  .transaction-history li strong {
+    font-weight: 600;
+    color: #4e8eff;
+  }
+  
+  /* Transaction Hash */
+  .transaction-history li span.hash {
+    word-wrap: break-word;
+    color: #ffffff;
+    font-size: 0.9rem;
+  }
+  
+  /* Transaction Timestamp */
+  .transaction-history li .timestamp {
+    color: #cccccc;
+    font-size: 0.9rem;
+    font-style: italic;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .transaction-history {
+      padding: 20px;
+    }
+  
+    .transaction-history h3 {
+      font-size: 1.5rem;
+    }
+  
+    .transaction-history li {
+      font-size: 0.9rem;
+    }
+  }
+  

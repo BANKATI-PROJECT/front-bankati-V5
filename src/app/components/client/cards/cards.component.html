@@ -1,0 +1,39 @@
+<div class="container">
+     <h1 class="text-center mb-2" style="color: rgb(29,52,84);"><strong>Add Virtual Cards</strong></h1>
+    <!-- Form for amount input -->
+    <form (ngSubmit)="onSubmit()">
+      <div class="inputBox">
+        <span>montant</span>
+        <input type="number" [(ngModel)]="amount" name="amount" placeholder="Montant à ajouter">
+      </div>
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+  
+    <!-- Liste des cartes -->
+    <div *ngIf="cards.length > 0">
+      <h3>Cartes ajoutées :</h3>
+      <div class="card-list">
+        <div *ngFor="let card of cards" class="card-container">
+          <div class="front">
+            <div class="image">
+              <img src="assets/images/chip.png" alt="chip">
+              <img src="assets/images/visa.png" alt="visa">
+            </div>
+            <div class="card-number-box">ID COMPTE</div>
+            <div class="flexbox">
+              <div class="box">
+                <span>montant</span>
+                <div class="amount">{{ card.amount }}€</div>
+              </div>
+            </div>
+          </div>
+          <div class="back">
+            <div class="stripe"></div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+  

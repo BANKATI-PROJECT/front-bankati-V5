@@ -1,0 +1,24 @@
+<div class="container">
+  <!-- Token Selector (Left Column) -->
+  <div class="token-selector">
+    <div class="token-list">
+      <button *ngFor="let token of tokens" (click)="selectToken(token)" class="token-button">
+        <div class="token-name">
+          {{ token }}
+        </div>
+        <div class="price">{{ getCurrentPrice(token) | currency: 'USD' }}</div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Chart (Right Column) -->
+  <div class="chart-container">
+    <canvas #priceChart></canvas>
+    
+    <!-- Token Info (Right of the chart) -->
+    <div class="token-info">
+      <img [src]="getTokenInfo(selectedToken).logo" alt="{{ selectedToken }} logo" class="token-logo">
+      <div class="address">{{ getTokenInfo(selectedToken).address || 'No address available' }}</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .container {
+    width: 600px;  /* Réduit la largeur de la carte */
+    height: 400px; /* Réduit la hauteur de la carte */
+    border: 1px solid #999;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    justify-content: space-between; /* Ajuste la distribution du contenu */
+    position: absolute;  /* Pour centrer la carte dans la page */
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centre l'élément */
+  }
+  
+  body, h1, h2, h3, h4, h5, h6, p, span, div, ul, li {
+    color: black !important;
+  }
+  
+  
+  .container h1 {
+    text-align: center; /* Aligne le titre à gauche */
+    margin-bottom: 15px;  /* Espacement sous le titre */
+    font-size: 30px; /* Augmente la taille du titre principal */
+  }
+  
+  h3 {
+    font-size: 20px; /* Augmente la taille des sous-titres */
+    margin-bottom: 5px; /* Réduit l'espace sous chaque sous-titre */
+    text-align: left; /* Aligne les sous-titres à gauche */
+  }
+  
+  
+  .first-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px; /* Espacement entre les éléments */
+  }
+  
+  .owner {
+    width: 100%;
+    margin-right: 10px; /* Réduit l'espace entre les champs */
+  }
+  
+  .input-field {
+    border: 1px solid #999;
+    border-radius: 5px;
+  }
+  
+  .input-field input {
+    width: 100%;
+    padding: 8px; /* Réduit le padding des champs de saisie */
+    border: none;
+    outline: none;
+  }
+  
+  .second-row, .third-row {
+    margin-bottom: 10px;
+  }
+  
+  .selection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .selection select {
+    padding: 8px 12px;  /* Réduit le padding des sélecteurs */
+  }
+  
+  button {
+    background-color: #FF7F00;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 12px;
+    font-size: 16px;
+    transition: 0.5s;
+    border: none;
+    width: 100%;
+  }
+  
+  button:hover {
+    background-color: rgb(255, 203, 30);
+  }
+  
+  .cards img {
+    width: 70px; /* Réduit la taille des icônes */
+  }
+
+  .message {
+  margin-top: 20px;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.success {
+  background-color: #4CAF50; /* Vert */
+  color: white;
+}
+
+.error {
+  background-color: #f44336; /* Rouge */
+  color: white;
+}
+
+  

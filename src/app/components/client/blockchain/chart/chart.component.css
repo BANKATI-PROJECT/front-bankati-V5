@@ -1,0 +1,105 @@
+/* Container for the entire layout */
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1200px; /* Adjust the max-width for better spacing */
+  margin: 0 auto; /* Center the container */
+  padding: 20px;
+  gap: 20px; /* Add gap between chart and token list */
+}
+
+/* Left Column (Token Selector) */
+.token-selector {
+  width: 30%;
+  height: 600px; 
+  display:block;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-height: 100%; /* No overflow, limits height */
+  padding-right: 20px;
+}
+
+/* Token List Items */
+.token-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Add space between buttons */
+}
+
+.token-button {
+  background: linear-gradient(90deg, #4e8eff, #0dcaf0);
+  color: #ffffff;
+  border: none;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.token-button:hover {
+  background: linear-gradient(90deg, #0dcaf0, #4e8eff);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+  transform: translateY(-3px);
+}
+
+.token-name {
+  font-weight: bold;
+}
+
+.price {
+  font-size: 0.9rem;
+  color: #f1f1f1;
+  margin-left: 10px;
+}
+
+/* Right Column (Chart) */
+.chart-container {
+  width: 100vw; /* Adjust width to make space for the token info */
+  height: 600px; /* Increase height */
+  background: linear-gradient(145deg, #121212, #1a1a1a);
+  border-radius: 16px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.7), 0px -5px 15px rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  overflow: hidden; /* Prevent overflow */
+  position: relative; /* To position token info next to the chart */
+}
+
+/* Ensure the chart scales proportionally */
+.chart-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Token Info (Logo and Address) */
+.token-info {
+  position: absolute;
+  top: 20px; /* Adjust to position it correctly */
+  right: 20px; /* Adjust to position it correctly */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.token-logo {
+  width: 40px; /* Adjust logo size */
+  height: 40px; /* Adjust logo size */
+  margin-bottom: 10px; /* Space between logo and address */
+}
+
+.address {
+  font-size: 1rem;
+  text-align: center;
+  max-width: 150px;
+  overflow-wrap: break-word; /* Ensure long addresses wrap */
+}

@@ -1,0 +1,98 @@
+<mat-toolbar style="background-color: #faa249;" class="mat-elevation-z8 toolbar">
+    <mat-toolbar-row>
+      <button (click)="drawer.toggle()" mat-icon-button>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="toolbar-title">Welcome to your Bank Account</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  
+  <mat-drawer-container class="drawer-container">
+    <mat-drawer #drawer mode="side" opened="true" class="drawer">
+      <mat-nav-list>
+        <mat-list-item class="menu-item">
+          <button (click)="navigateTo('profile')" mat-button>
+            <mat-icon>person</mat-icon>
+            <span class="g">Profile</span>
+          </button>
+        </mat-list-item>
+
+        <mat-list-item class="menu-item">
+            <button (click)="navigateTo('credit-cart')" mat-button>
+              <mat-icon>credit_card</mat-icon>
+              <span class="g">Credit card</span>
+            </button>
+          </mat-list-item>
+
+        <mat-list-item class="menu-item">
+          <button (click)="navigateTo('crianciers')" mat-button>
+            <mat-icon>table</mat-icon>
+            <span class="g">Pay Bills</span>
+          </button>
+        </mat-list-item>
+        <mat-list-item class="menu-item">
+          <button (click)="navigateTo('transfer-money')" mat-button>
+            <mat-icon>swap_horiz</mat-icon>
+            <span class="g">Transfer Money</span>
+          </button>
+        </mat-list-item>
+
+
+
+        <mat-list-item class="menu-item">
+          <button (click)="navigateTo('cards')" mat-button>
+            <mat-icon>credit_card</mat-icon>
+            <span class="g">My Cards</span>
+          </button>
+        </mat-list-item>
+        <mat-list-item class="menu-item">
+          <button (click)="navigateTo('security-settings')" mat-button>
+            <mat-icon>settings</mat-icon>
+            <span class="g">Security Settings</span>
+          </button>
+        </mat-list-item>
+
+
+
+        <mat-list-item class="menu-item">
+          <button (click)="toggleCryptoWalletView()" mat-button>
+            <mat-icon>account_balance_wallet</mat-icon>
+            <span class="g">Crypto Wallet</span>
+          </button>
+        </mat-list-item>
+
+        <div *ngIf="showWallet" class="wallet-links">
+          <mat-list-item class="menu-item">
+            <button (click)="setCurrentView('transactionHistory')" mat-button>
+              <span class="c">Transaction History</span>
+            </button>
+          </mat-list-item>
+          <mat-list-item class="menu-item">
+            <button (click)="setCurrentView('trade')" mat-button>
+              <span class="c">Trade</span>
+            </button>
+          </mat-list-item>
+          <mat-list-item class="menu-item">
+            <button (click)="setCurrentView('markets')" mat-button>
+              <span class="c">Markets</span>
+            </button>
+          </mat-list-item>
+        </div>
+
+      </mat-nav-list>
+    </mat-drawer>
+  
+    <mat-drawer-content class="drawer-content">
+      <div style="text-align: center; min-height: 600px;">
+        <!-- Affichage du contenu dynamique en fonction de currentView -->
+        <app-agences *ngIf="currentView === 'crianciers'"></app-agences>
+        <app-profile *ngIf="currentView === 'profile'"></app-profile>
+        <app-credit-cart *ngIf="currentView === 'credit-cart'"></app-credit-cart>
+        <app-transfer-money *ngIf="currentView === 'transfer-money'"></app-transfer-money>
+        <app-cards *ngIf="currentView === 'cards'"></app-cards>
+       
+    <app-wallet *ngIf="currentView === 'markets'"></app-wallet>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+  

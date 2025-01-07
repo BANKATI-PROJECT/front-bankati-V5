@@ -1,0 +1,64 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  .drawer {
+    width: 250px; /* Ajustez la largeur selon vos besoins */
+    max-width: 250px; /* Limitez la largeur maximale */
+  }
+  
+
+  ::ng-deep .mat-badge-content {
+    background-color: #FF7F00 !important; /* Couleur personnalisée */
+  }
+
+  mat-list-item:hover {
+    background-color: #FF7F00;  /* Couleur orange */
+    color: white;  /* Changer la couleur du texte, si nécessaire */
+  }
+
+  mat-drawer mat-icon {
+    color: #080808; /* Couleur orange personnalisée */
+  }
+
+  .g {
+    color: #080808; /* Couleur orange personnalisée */
+  }
+  .c {
+    color: #444343; /* Couleur orange personnalisée */
+  }
+
+  mat-list-item:focus {
+    background-color: #FF7F00;  /* Couleur orange */
+    color: white;  /* Changer la couleur du texte, si nécessaire */
+  }
+
+  mat-toolbar {
+     /* Augmenter l'espace à gauche */
+    padding-right: 10px; /* Un peu d'espace à droite si nécessaire */
+  }
+  
+  /* Personnaliser la couleur du mat-drawer */
+  mat-drawer {
+    background-color: #d1cdcd; /* Fond du menu */
+    color: white; /* Texte blanc */
+  }
+ 
+  /* Personnaliser le fond du mat-drawer-container */
+  mat-drawer-container {
+    background-color: #f4f4f4; /* Fond gris clair */
+  }
+  
+
+
+
+
+  /* Supprimer les marges et padding de mat-drawer-content */
+.drawer-content {
+  margin-left: 250px !important;
+  
+  width: calc(100% - 250px); /* Ajuste la largeur en fonction de celle du drawer */
+  box-sizing: border-box; /* Assure que padding ne modifie pas la largeur réelle */
+}
+
+
+

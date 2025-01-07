@@ -1,0 +1,53 @@
+/* Container Styles */
+.container {
+    max-width: 500px;  /* Set a max-width for the form */
+    margin: auto;
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #FFF; /* Ensure it fits the general theme */
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Form Control Styles */
+.form-control {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+/* Button Styling */
+.btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    background-color: #ff7f00; /* Match the orange color from the palette */
+    border: none;
+    color: #fff;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #ffaf50; /* Lighter orange for hover */
+    transform: scale(1.05);
+}
+
+/* Text Alignment */
+.text-center {
+    text-align: center;
+}

@@ -1,0 +1,46 @@
+<nav class="navbar">
+    <div class="container">
+      <a class="navbar-brand" href="/" style="display: flex; align-items: center;">
+
+        <span class="brand-name">BANKATI</span>
+      </a>
+      <nav>
+        <ul>
+          <li *ngIf="isLoggedOut()">
+            <a href="/">Home</a>
+          </li>
+          <li *ngIf="isAdmin()">
+            <a href="/agences">Agencies</a>
+          </li>
+          <li *ngIf="isAdmin()">
+            <a href="/admin">Agents</a>
+          </li>
+          <li *ngIf="isAgent()">
+            <a href="/clients">Clients</a>
+          </li>
+          <li *ngIf="isAgent()">
+            <a href="/infos">Infos</a>
+          </li>
+          <!-- <li *ngIf="isClient()">
+            <button (click)="toggleView()">Crypto Wallet</button>
+          </li> -->
+
+          <!-- <li *ngIf="isClient()">
+            <a href="/profil">Profil</a>
+          </li>
+          <li *ngIf="isClient()">
+            <a href="/invoice-history">Historique</a> -->
+          <!-- </li>
+          <li *ngIf="isClient()">
+            <a href="/crianciers">Créanciers</a>
+          </li> -->
+          <li *ngIf="isLoggedIn()">
+            <button (click)="logout()">Logout</button>
+          </li>
+          <li *ngIf="isLoggedOut()">
+            <a href="/login">Login</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </nav>

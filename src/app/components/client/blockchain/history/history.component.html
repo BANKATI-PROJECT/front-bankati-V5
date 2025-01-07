@@ -1,0 +1,12 @@
+      <!-- Transaction History -->
+      <div class="transaction-history">
+        <h3>Transaction History</h3>
+        <ul>
+          <li *ngFor="let tx of transactionHistory">
+            <strong>Hash:</strong> {{ tx.hash }} <br />
+            <strong>Amount:</strong> {{ tx.amount }} ETH <br />
+            <strong>To:</strong> {{ tx.To }} <br />
+            <strong>Timestamp:</strong> {{ tx.timestamp | date: 'short' }}
+          </li>
+        </ul>
+      </div>
