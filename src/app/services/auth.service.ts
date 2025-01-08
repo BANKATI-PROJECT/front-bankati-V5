@@ -7,7 +7,7 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'https://5ed8-105-71-135-223.ngrok-free.app/auth'; // Utilise la Gateway URL
+  private apiUrl = 'https://6cb4-105-67-132-153.ngrok-free.app/auth'; // Utilise la Gateway URL
   private userRole: string | null = null;
 
   constructor(private http: HttpClient) {}
