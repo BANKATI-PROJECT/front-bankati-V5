@@ -7,22 +7,22 @@ import { Observable } from 'rxjs';
 })
 export class ClientService {
 
-  private baseUrl = 'https://311c-105-73-96-213.ngrok-free.app'; // Remplacez par votre URL backend
+  private baseUrl = 'http://localhost:8090'; // Remplacez par votre URL backend
 
   constructor(private http: HttpClient) {}
 
   // Méthode pour ajouter une carte réelle
-  addRealCard(portefeuilleId: number, realCardData: any): Observable<any> {
+  addRealCard(portefeuilleId: String, realCardData: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/portefeuilles/addRealCard/${portefeuilleId}`, realCardData, { responseType: 'text' });
   }
 
   // Méthode pour obtenir les cartes liées
-  getRealCards(portefeuilleId: number): Observable<any> {
+  getRealCards(portefeuilleId: String): Observable<any> {
     return this.http.get(`${this.baseUrl}/getRealCards/${portefeuilleId}`);
   }
 
   // Méthode pour obtenir le solde du portefeuille
-  getPortefeuille(portefeuilleId: number): Observable<any> {
+  getPortefeuille(portefeuilleId: String): Observable<any> {
     return this.http.get(`${this.baseUrl}/${portefeuilleId}`);
   }
 

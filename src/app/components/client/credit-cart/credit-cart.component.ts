@@ -38,7 +38,7 @@ export class CreditCartComponent {
       return;
     }
 
-    const portefeuilleId = 3; // ID du portefeuille
+    const portefeuilleId = "556c5017-35d3-4097-b6c8-80da1b644e1b"; // ID du portefeuille
     const realCardData = {
       safeToken: 'safe', // Remplacez par le token sécurisé
       cardNum: this.creditCardForm.value.cardNumber,
