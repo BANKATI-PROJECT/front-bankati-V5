@@ -1,59 +1,69 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from '../../../app.routes';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatTableModule } from '@angular/material/table';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { HttpClientModule } from '@angular/common/http';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatChipsModule } from '@angular/material/chips';
+import { ClientService } from '../../../services/client/client.service';
 
 @Component({
   selector: 'app-credit-cart',
   templateUrl: './credit-cart.component.html',
   styleUrls: ['./credit-cart.component.css'],
   standalone: true,
-    imports: [
-      CommonModule,
-      FormsModule
-    ],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
 })
 export class CreditCartComponent {
-  owner: string = '';
-  cvv: string = '';
-  cardNumber: string = '';
-  selectedMonth: string = 'Jan';
-  selectedYear: string = '2020';
+  creditCardForm: FormGroup;
   message: string = '';
   isSuccess: boolean = false;
+  solde: number = 887;
 
-  // Méthode appelée lors du clic sur le bouton de confirmation
+
+  constructor(private clientService: ClientService, private fb: FormBuilder) {
+    this.creditCardForm = this.fb.group({
+      owner: ['', Validators.required],
+      cardNumber: [
+        '',
+        [Validators.required, Validators.pattern('^[0-9]{16}$')],
+      ],
+      cvv: ['', [Validators.required, Validators.pattern('^[0-9]{3}$')]],
+      selectedMonth: ['Jan', Validators.required],
+      selectedYear: ['2020', Validators.required],
+    });
+  }
+
   ajouter(): void {
-    // Validation des champs
-    if (this.owner && this.cvv && this.cardNumber && this.selectedMonth && this.selectedYear) {
-      // Si tous les champs sont remplis, afficher un message de succès
-      this.message = 'Cart ajouté avec succès !';
-      this.isSuccess = true;
-    } else {
-      // Si des champs sont manquants, afficher un message d'erreur
-      this.message = 'Tous les champs doivent être remplis.';
+    if (this.creditCardForm.invalid) {
+      this.message = 'Veuillez corriger les erreurs avant de soumettre.';
       this.isSuccess = false;
+      return;
     }
-    
-    // Log des données (pour le débogage)
-    console.log('Owner:', this.owner);
-    console.log('CVV:', this.cvv);
-    console.log('Card Number:', this.cardNumber);
-    console.log('Expiration Date:', this.selectedMonth, this.selectedYear);
+
+    const portefeuilleId = 3; // ID du portefeuille
+    const realCardData = {
+      safeToken: 'safe', // Remplacez par le token sécurisé
+      cardNum: this.creditCardForm.value.cardNumber,
+      cvv: this.creditCardForm.value.cvv,
+      expire: `${this.creditCardForm.value.selectedYear}-${this.creditCardForm.value.selectedMonth}`,
+      label: this.creditCardForm.value.owner,
+      solde:this.solde,
+    };
+
+    console.log(realCardData);
+
+
+    this.clientService.addRealCard(portefeuilleId, realCardData).subscribe(
+      (response) => {
+        this.message = 'Carte ajoutée avec succès !';
+        this.isSuccess = true;
+        console.log(response);
+      },
+      (error) => {
+        this.message = 'Erreur lors de l’ajout de la carte.';
+        this.isSuccess = false;
+        console.error(error);
+      }
+    );
+
+    this.clientService.setOwner(this.creditCardForm.value.owner);
   }
 }

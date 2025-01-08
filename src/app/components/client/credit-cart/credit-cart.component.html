@@ -1,16 +1,24 @@
 <div class="container">
-    <h1>Credit card</h1>
+  <h1>Credit card</h1>
+  <form [formGroup]="creditCardForm" (ngSubmit)="ajouter()">
     <div class="first-row">
       <div class="owner">
         <h3>Owner</h3>
         <div class="input-field">
-          <input type="text" [(ngModel)]="owner" />
+          <input formControlName="owner" type="text" />
+        </div>
+        <div *ngIf="creditCardForm.get('owner')?.touched && creditCardForm.get('owner')?.invalid" class="error-message">
+          <div *ngIf="creditCardForm.get('owner')?.hasError('required')">Le nom du propriétaire est requis.</div>
         </div>
       </div>
       <div class="cvv">
         <h3>CVV</h3>
         <div class="input-field">
-          <input type="password" [(ngModel)]="cvv" />
+          <input formControlName="cvv" type="text" />
+        </div>
+        <div *ngIf="creditCardForm.get('cvv')?.touched && creditCardForm.get('cvv')?.invalid" class="error-message">
+          <div *ngIf="creditCardForm.get('cvv')?.hasError('required')">Le CVV est requis.</div>
+          <div *ngIf="creditCardForm.get('cvv')?.hasError('pattern')">Le CVV doit contenir exactement 3 chiffres.</div>
         </div>
       </div>
     </div>
@@ -18,7 +26,11 @@
       <div class="card-number">
         <h3>Card Number</h3>
         <div class="input-field">
-          <input type="text" [(ngModel)]="cardNumber" />
+          <input formControlName="cardNumber" type="text" />
+        </div>
+        <div *ngIf="creditCardForm.get('cardNumber')?.touched && creditCardForm.get('cardNumber')?.invalid" class="error-message">
+          <div *ngIf="creditCardForm.get('cardNumber')?.hasError('required')">Le numéro de carte est requis.</div>
+          <div *ngIf="creditCardForm.get('cardNumber')?.hasError('pattern')">Le numéro de carte doit contenir exactement 16 chiffres.</div>
         </div>
       </div>
     </div>
@@ -26,7 +38,7 @@
       <h3>Card Expiration</h3>
       <div class="selection">
         <div class="date">
-          <select [(ngModel)]="selectedMonth">
+          <select formControlName="selectedMonth">
             <option value="Jan">Jan</option>
             <option value="Feb">Feb</option>
             <option value="Mar">Mar</option>
@@ -40,26 +52,27 @@
             <option value="Nov">Nov</option>
             <option value="Dec">Dec</option>
           </select>
-          <select [(ngModel)]="selectedYear">
+          <select formControlName="selectedYear">
             <option value="2020">2020</option>
             <option value="2019">2019</option>
             <option value="2018">2018</option>
             <option value="2017">2017</option>
             <option value="2016">2016</option>
             <option value="2015">2015</option>
+            <option value="2025">2025</option>
           </select>
         </div>
         <div class="cards">
-          <img src="assets/images/mc.png" alt="MasterCard" />
-          <img src="assets/images/vi.png" alt="Visa" />
-         
+          <img src="/assets/images/mc.png" alt="MasterCard" />
+          <img src="/assets/images/vi.png" alt="Visa" />
         </div>
       </div>
     </div>
-    <button (click)="ajouter()">ajouter</button>
+    <button type="submit" [disabled]="creditCardForm.invalid">ajouter</button>
+  </form>
 
   <!-- Message de succès ou d'erreur -->
   <div *ngIf="message" [ngClass]="{'success': isSuccess, 'error': !isSuccess}" class="message">
     {{ message }}
   </div>
-  </div>
+</div>

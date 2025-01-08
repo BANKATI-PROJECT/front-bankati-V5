@@ -4,6 +4,7 @@ import { AuthService } from '../../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';  // Pour ngModel
 import { MatIconModule } from '@angular/material/icon';  // Si vous utilisez Angular Material pour les icônes
+import { ClientService } from '../../../services/client/client.service';
 
 
 @Component({
@@ -18,14 +19,18 @@ import { MatIconModule } from '@angular/material/icon';  // Si vous utilisez Ang
 })
 export class ProfileComponent implements OnInit {
   client: any;
-  balance: number = 1500000;
   amountToUpdate: number = 0;
   isInputVisible: boolean = false;
 
-  constructor(private authService: AuthService) {}
+  owner: string = '';
+  balance: number = 0;
 
-  ngOnInit(): void {}
+  constructor(private clientService: ClientService) {}
 
+  ngOnInit(): void {
+    // Récupérez le nom du propriétaire du service
+    this.owner = this.clientService.getOwner();
+  }
 
   toggleInput(): void {
     this.isInputVisible = !this.isInputVisible;
